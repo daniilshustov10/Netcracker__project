@@ -1,0 +1,28 @@
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    overflow: hidden;
+    padding: 4px 15px;
+    background-color: var(--header-bg-color);
+
+    &__logo {
+        display: inline-block;
+        .font-bold-bigger();
+        color: @white;
+        cursor: pointer;
+        opacity: var(--header-opacity);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__button {
+        position: absolute;
+        top: 4px;
+        right: 30px;
+    }
+}

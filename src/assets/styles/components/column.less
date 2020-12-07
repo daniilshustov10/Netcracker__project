@@ -1,0 +1,107 @@
+.column {
+    display: inline-block;
+    position: relative;
+    min-width: 272px;
+    width: 272px;
+    margin: 0 4px;
+    vertical-align: top;
+    white-space: nowrap;
+
+    &:hover &__delete {
+        opacity: 1;
+    }
+
+    &__delete {
+        position: absolute;
+        top: 1px;
+        right: 2px;
+        z-index: 100;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+
+        &::before {
+            content: "\2718";
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        position: relative;
+        white-space: normal;
+        background-color: var(--column-bg);
+        border-radius: 3px;
+
+        &-head {
+            position: relative;
+            margin: 12px 20px 6px 14px;
+            min-height: 20px;
+            padding: 4px 8px;
+            max-height: 256px;
+            background: transparent;
+            border-radius: 3px;
+            .font-medium();
+            overflow: hidden;
+            overflow-wrap: break-word;
+            cursor: pointer;
+
+            &:focus {
+                background: @white;
+                outline: none;
+                box-shadow: inset 0 0 0 2px @blue;
+            }
+
+            &._warning:focus {
+                box-shadow: inset 0 0 0 2px @red;
+            }
+        }
+
+        &-list {
+            margin: 0 4px;
+            padding: 0 4px;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: @gray;
+                border-radius: 3px;
+                box-shadow: inset 2px 2px 2px @gray-darken-1,
+                    inset -2px -2px 2px @black-light-1;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: @black-light-3;
+                border-radius: 3px;
+            }
+        }
+
+        &-add {
+            position: relative;
+            min-height: 20px;
+            padding: 3px 8px 4px;
+            margin: 0 8px 8px;
+            border-radius: 3px;
+            color: @blue-light-1;
+            user-select: none;
+
+            &::before {
+                content: "\271A";
+                margin-right: 5px;
+            }
+
+            &:hover {
+                background: @black-light-2;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.button {
+    border: none;
+    min-height: 32px;
+    height: 32px;
+    padding: 4px 6px;
+    color: @white;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &._primary {
+        background-color: @green;
+        cursor: auto;
+
+        &._active {
+            background-color: @lightGreen;
+            cursor: pointer;
+        }
+    }
+
+    &._secondary {
+        background-color: @darkRed;
+
+        &:hover {
+            background-color: @red;
+        }
+    }
+
+    &._dark {
+        min-height: 20px;
+        height: 20px;
+        background: @blue;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &._light {
+        background: @gray-darken-1;
+
+        &:hover {
+            background: @gray-darken-2;
+        }
+    }
+}

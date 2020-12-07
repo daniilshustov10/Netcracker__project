@@ -1,0 +1,61 @@
+@font-smaller-size: 11px;
+@font-small-size: 12px;
+@font-normal-size: 14px;
+@font-medium-size: 15px;
+@font-big-size: 20px;
+@font-bigger-size: 26px;
+@font-large-size: 30px;
+
+.font(@font-size, @font-weight, @font-style) {
+    font-family: "Segoe UI", "Roboto", "Noto Sans", "Helvetica Neue", sans-serif;
+    font-size: @font-size;
+    font-weight: @font-weight;
+    font-style: @font-style;
+}
+
+.font-base() {
+    .font(@font-normal-size, 400, normal);
+}
+
+.font-base-smaller() {
+    .font-base();
+    font-size: @font-smaller-size;
+}
+
+.font-base-small() {
+    .font-base();
+    font-size: @font-small-size;
+}
+
+.font-base-large() {
+    .font-base();
+    font-size: @font-large-size;
+}
+
+.font-medium() {
+    .font(@font-medium-size, 500, normal);
+}
+
+.font-medium-bigger() {
+    .font-medium();
+    font-size: @font-large-size;
+}
+
+.font-bold() {
+    .font(@font-normal-size, 700, normal);
+}
+
+.font-bold-medium() {
+    .font-bold();
+    font-size: @font-medium-size;
+}
+
+.font-bold-bigger() {
+    .font-bold();
+    font-size: @font-bigger-size;
+}
+
+.font-bold-large {
+    .font-bold();
+    font-size: @font-large-size;
+}

@@ -1,0 +1,93 @@
+.board {
+    @headerHeight: 40px;
+    display: flex;
+    height: calc(100% - @headerHeight);
+    padding: 20px 5px 8px;
+    overflow-y: auto;
+    user-select: none;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        width: 15px;
+        height: 15px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--board-scroll-color);
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 2px @gray-darken-1,
+            inset -2px -2px 2px @black-light-1;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @black-light-1;
+    }
+
+    &__column {
+        height: 100%;
+
+        &:first-child {
+            margin-left: 8px;
+        }
+    }
+
+    &__add-column {
+        display: flex;
+        flex-direction: column;
+        min-width: 272px;
+        width: 272px;
+        height: 32px;
+        margin: 0 4px;
+        margin-right: 8px;
+        align-items: center;
+        background-color: var(--addColumn-bg);
+        cursor: pointer;
+        border-radius: 3px;
+        color: var(--addColumn-color);
+
+        &._form {
+            height: 78px;
+
+            &:hover {
+                background-color: var(--addColumn-bg);
+            }
+        }
+
+        &:hover {
+            background-color: var(--addColumn-hover);
+        }
+
+        &-content {
+            padding: 5px 0px;
+            width: 100%;
+            text-align: center;
+
+            &::before {
+                content: "\271A";
+                margin-right: 5px;
+            }
+        }
+
+        &-form {
+            width: 100%;
+        }
+    }
+
+    &__button {
+        position: fixed;
+        bottom: 70px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: @blue;
+        border: none;
+        color: @white;
+        cursor: pointer;
+
+        &:hover {
+            background: @gray;
+            color: @black;
+        }
+    }
+}

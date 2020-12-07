@@ -1,0 +1,45 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    min-height: 20px;
+    border-radius: 3px;
+    margin-right: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+
+    &:hover &__delete {
+        opacity: 1;
+    }
+
+    &__content {
+        padding: 6px 17px 6px 10px;
+        background-color: @white;
+        word-break: break-all;
+        color: @blue-darken-1;
+
+        &:focus {
+            outline: none;
+            box-shadow: inset 0 0 0 2px @blue;
+        }
+
+        &._warning:focus {
+            box-shadow: inset 0 0 0 2px @red;
+        }
+    }
+
+    &__delete {
+        position: absolute;
+        top: 3px;
+        right: 5px;
+        opacity: 0;
+        width: 10px;
+        height: 10px;
+
+        &::before {
+            content: "\2718";
+        }
+    }
+}

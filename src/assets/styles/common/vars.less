@@ -1,0 +1,31 @@
+:root {
+    --body-bg: url("../../images/main.jpg");
+    --body-bg-size: cover;
+    --body-animate: none;
+    --header-bg-color: @black-light-1;
+    --header-opacity: 0.5;
+    --board-scroll-color: @lightGray;
+    --addColumn-bg: @gray-darken-1;
+    --addColumn-color: @white;
+    --addColumn-hover: @gray-darken-2;
+    --column-bg: @lightGray;
+}
+
+:root[theme="light"] {
+    --body-bg: linear-gradient(
+        -45deg,
+        @green-light-2,
+        @green-light-1,
+        @blue-light-2,
+        @blue-light-3
+    );
+    --body-bg-size: 400% 400%;
+    --body-animate: background-gradient 15s ease infinite;
+    --header-bg-color: @light-blue;
+    --header-opacity: 0.9;
+    --board-scroll-color: @light-blue;
+    --addColumn-bg: @white-darken-1;
+    --addColumn-color: @blue-light-1;
+    --addColumn-hover: @gray;
+    --column-bg: @white-darken-1;
+}
