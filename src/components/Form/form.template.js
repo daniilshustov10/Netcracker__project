@@ -10,7 +10,8 @@ export function template(props) {
                 attrs: { 
                     type: 'text', 
                     placeholder: props.placeholder, 
-                    name: 'input' 
+                    name: 'input',
+                    maxLength: props.maxLength
                 }, 
                 classes: ['form__input'], 
                 textContent: null 

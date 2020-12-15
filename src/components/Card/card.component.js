@@ -9,6 +9,12 @@ export class Card extends Component {
         this.component = null;
     }
 
+    getCardContent() {
+        const { columnId, id: cardId} = this.props;
+
+        return Storage.getCardContent(columnId, cardId);
+    }
+
     updateCard(content) {
         const { columnId, id: cardId} = this.props;
 
@@ -55,23 +61,26 @@ export class Card extends Component {
         }).bind(this));
 
 
-        cardContent.addEventListener('blur', (function blurHandler(event) { 
+        cardContent.addEventListener('blur', (function blurHandler(event) {
             const content = cardContent.textContent.trim();
+            deleteCard.classList.remove('_hide');    
 
             if (content.length) {
                 if (this.props.content !== content) this.updateCard(content);
                 cardContent.removeAttribute('contenteditable');
-                deleteCard.classList.remove('_hide');                
+                // deleteCard.classList.remove('_hide');                
             } else {
-                if (!cardContent.classList.contains('_warning')) cardContent.classList.add('_warning');
-                cardContent.focus();
+                cardContent.textContent = this.getCardContent();
+                // deleteCard.classList.remove('_hide');  
+                // if (!cardContent.classList.contains('_warning')) cardContent.classList.add('_warning');
+                // cardContent.focus();
             }               
 
         }).bind(this));
 
-       cardContent.addEventListener('input', (function inputHandler(event) {
-            if (cardContent.textContent.trim().length) cardContent.classList.remove('_warning');
-        }).bind(this));           
+    //    cardContent.addEventListener('input', (function inputHandler(event) {
+    //         if (cardContent.textContent.trim().length) cardContent.classList.remove('_warning');
+    //     }).bind(this));           
     }   
     
     render() {

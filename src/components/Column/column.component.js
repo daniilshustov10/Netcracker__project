@@ -2,11 +2,17 @@ import { Storage } from "../../utils/localStorage";
 import { Component } from "../Component";
 import { Board } from '../Board';
 import { template } from "./column.template";
+import { isAllowedKeyCode } from "../../utils/isAllowedKeyCode";
+import { MAX_COLUMN_HEAD_LENGTH } from "../../utils/constant";
 
 export class Column extends Component {
     constructor(props = {}) {
         super(props);
         this.component = null;
+    }
+
+    getColumnHead() {
+        return Storage.getColumnHead(this.props.id);
     }
 
     updateColumnHead(head) {
@@ -104,15 +110,30 @@ export class Column extends Component {
                 if (this.props.head !== newHead) this.updateColumnHead(newHead);                
                 columnContentHead.removeAttribute('contenteditable'); 
             } else {
-                if (!columnContentHead.classList.contains('_warning')) columnContentHead.classList.add('_warning');
-                columnContentHead.focus();
-            }       
+                columnContentHead.textContent = this.getColumnHead();
+            }
+            // } else {
+            //     if (!columnContentHead.classList.contains('_warning')) columnContentHead.classList.add('_warning');
+            //     columnContentHead.focus();
+            // }       
 
         }).bind(this));
 
-        columnContentHead.addEventListener('input', (function inputHandler(event) {
-            if (columnContentHead.textContent.trim().length) columnContentHead.classList.remove('_warning');
-        }).bind(this));        
+
+        columnContentHead.addEventListener('keydown', function keydownHandler(event) {
+            if (this.textContent.length === MAX_COLUMN_HEAD_LENGTH && !isAllowedKeyCode(event)) {
+                event.preventDefault();
+            }
+        });
+
+        columnContentHead.addEventListener('paste', function pasteHandler(event) {
+            if (event.clipboardData) {
+                if (event.clipboardData.getData('Text').length + this.textContent.length > MAX_COLUMN_HEAD_LENGTH && event.keyCode !== 8) {
+                    event.preventDefault();
+                    this.textContent = this.textContent + event.clipboardData.getData('Text').slice(0, MAX_COLUMN_HEAD_LENGTH - this.textContent.length);
+                }
+            }
+        });
     }    
 
     render() {

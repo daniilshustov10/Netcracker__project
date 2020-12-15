@@ -1,5 +1,6 @@
 import { Column } from "../Column/column.component";
 import { Form } from "../Form/form.component";
+import { MAX_COLUMN_HEAD_LENGTH } from '../../utils/constant';
 
 export function template(props) {
     return {
@@ -28,6 +29,7 @@ export function template(props) {
                         textContent: null,
                         childNodes: [
                             new Form({
+                                maxLength: MAX_COLUMN_HEAD_LENGTH,
                                 placeholder: 'Введите название столбца',
                                 buttonName: 'Добавить список'
                             }).render()                            

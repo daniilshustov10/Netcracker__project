@@ -1,77 +1,103 @@
 export class Storage {
     static getFromLocalStorage() {
-        return JSON.parse(localStorage.getItem("trello")) || {};
+        return JSON.parse(localStorage.getItem("mello")) || {theme: 'dark'};
+    }
+
+    static changeTheme() {
+        const mello = Storage.getFromLocalStorage();         
+        mello.theme = mello.theme === 'light' ? 'dark' : 'light';
+
+        localStorage.setItem("mello", JSON.stringify(mello));
+    }
+
+    static getTheme() {
+        const mello = Storage.getFromLocalStorage();
+        return mello.theme;        
     }
 
     static getColumns() {
-        const trello = Storage.getFromLocalStorage();
-        return Object.keys(trello).includes("columns") ? trello.columns : [];
+        const mello = Storage.getFromLocalStorage();
+        return Object.keys(mello).includes("columns") ? mello.columns : [];
     }
 
     static addColumn(column) {
-        const trello = Storage.getFromLocalStorage();
-        Object.keys(trello).includes("columns")
-            ? trello.columns.push(column)
-            : (trello.columns = [column]);
+        const mello = Storage.getFromLocalStorage();
+        Object.keys(mello).includes("columns")
+            ? mello.columns.push(column)
+            : (mello.columns = [column]);
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
     }
 
     static deleteColumn(columnId) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        trello.columns = trello.columns.filter(
+        mello.columns = mello.columns.filter(
             (column) => column.id !== columnId
         );
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
+    }
+
+    static getColumnHead(columnId) {
+        const mello = Storage.getFromLocalStorage();
+
+        return mello.columns.find(column => column.id === columnId).head
     }
 
     static updateColumnHead(columnId, head) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        trello.columns.find((column) => column.id === columnId).head = head;
+        mello.columns.find((column) => column.id === columnId).head = head;
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
     }
 
     static getColumn(columnId) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        return trello.columns.find((column) => column.id === columnId);
+        return mello.columns.find((column) => column.id === columnId);
     }
 
     static addCard(columnId, card) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        trello.columns
+        mello.columns
             .find((column) => column.id === columnId)
             .cards.push(card);
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
     }
 
     static updateCard(columnId, cardId, content) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        trello.columns
+        mello.columns
             .find((column) => column.id === columnId)
             .cards.map((card) => {
                 if (card.id === cardId) card.content = content;
             });
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
+    }
+
+    static getCardContent(columnId, cardId) {
+        const mello = Storage.getFromLocalStorage();
+
+        return mello.columns
+            .find(column => column.id === columnId).cards
+            .find(card => card.id === cardId).content
     }
 
     static deleteCard(columnId, cardId) {
-        const trello = Storage.getFromLocalStorage();
+        const mello = Storage.getFromLocalStorage();
 
-        trello.columns.find(
+        mello.columns.find(
             (column) => column.id === columnId
-        ).cards = trello.columns
+        ).cards = mello.columns
             .find((column) => column.id === columnId)
             .cards.filter((card) => card.id !== cardId);
 
-        localStorage.setItem("trello", JSON.stringify(trello));
+        localStorage.setItem("mello", JSON.stringify(mello));
     }
 }

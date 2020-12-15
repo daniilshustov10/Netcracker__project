@@ -1,5 +1,6 @@
 import { Component } from "../Component";
 import { template } from "./header.template";
+import { Storage } from '../../utils/localStorage';
 
 export class Header extends Component {
     constructor(props = {}) {
@@ -13,9 +14,8 @@ export class Header extends Component {
         const htmlRoot = document.documentElement;
 
         headerButton.addEventListener('click', () => {
-            htmlRoot.hasAttribute('theme')
-                ? htmlRoot.removeAttribute('theme')
-                : htmlRoot.setAttribute('theme', 'light')
+            Storage.changeTheme();
+            htmlRoot.setAttribute('theme', Storage.getTheme());
         })
 
         headerLogo.addEventListener('click', function clickHandler(event) {
